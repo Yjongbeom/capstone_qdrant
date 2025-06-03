@@ -4,9 +4,6 @@ spring:
   jackson:
     serialization:
       indent-output: true
-  profiles:
-    active:
-      ${PROFILE}
 
 qdrant:
   host: ${QDRANT_HOST}
