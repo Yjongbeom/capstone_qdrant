@@ -35,7 +35,7 @@ dependencies {
     implementation 'io.qdrant:client:1.14.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     implementation 'com.google.protobuf:protobuf-java:4.28.2'
-    implementation 'io.grpc:grpc-netty-shaded:1.59.0'
+    implementation 'io.grpc:grpc-netty-shaded:1.65.1'
     implementation 'com.google.guava:guava:32.1.2-jre'
 
 }
