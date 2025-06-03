@@ -1,13 +1,12 @@
 spring:
   application:
     name: capstone_recommend
-
   jackson:
     serialization:
       indent-output: true
-
   profiles:
-    active: ${PROFILE}
+    active:
+      ${PROFILE}
 
 qdrant:
   host: ${QDRANT_HOST}
