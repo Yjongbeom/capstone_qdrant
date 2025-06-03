@@ -6,7 +6,11 @@ spring:
     serialization:
       indent-output: true
 
+  profiles:
+    active: ${PROFILE}
+
 qdrant:
   host: ${QDRANT_HOST}
   api-key: ${QDRANT_API_KEY}
   port: ${QDRANT_PORT}
+
