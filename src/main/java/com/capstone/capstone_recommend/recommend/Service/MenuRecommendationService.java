@@ -100,7 +100,7 @@ public class MenuRecommendationService {
         return similarity * Math.log1p(reviewCount);
     }
 
-    // Qdrant 결과 -> DTO 매핑
+    // Qdrant 결과 -> DTO 매핑 (소수점 첫째 자리로 반올림)
     private MenuRecommendation mapToMenuRecommendation(Points.ScoredPoint point) {
         Map<String, JsonWithInt.Value> payload = point.getPayloadMap();
 
@@ -116,14 +116,18 @@ public class MenuRecommendationService {
         Map<String, JsonWithInt.Value> tasteFields = tasteStruct.getFieldsMap();
 
         TasteProfile profile = new TasteProfile();
-        profile.setUmami(tasteFields.get("umami").getDoubleValue());
-        profile.setSweet(tasteFields.get("sweet").getDoubleValue());
-        profile.setSour(tasteFields.get("sour").getDoubleValue());
-        profile.setSpicy(tasteFields.get("spicy").getDoubleValue());
-        profile.setBitter(tasteFields.get("bitter").getDoubleValue());
-        profile.setSalty(tasteFields.get("salty").getDoubleValue());
+        profile.setUmami(roundToOneDecimal(tasteFields.get("umami").getDoubleValue()));
+        profile.setSweet(roundToOneDecimal(tasteFields.get("sweet").getDoubleValue()));
+        profile.setSour(roundToOneDecimal(tasteFields.get("sour").getDoubleValue()));
+        profile.setSpicy(roundToOneDecimal(tasteFields.get("spicy").getDoubleValue()));
+        profile.setBitter(roundToOneDecimal(tasteFields.get("bitter").getDoubleValue()));
+        profile.setSalty(roundToOneDecimal(tasteFields.get("salty").getDoubleValue()));
 
         rec.setTasteProfile(profile);
         return rec;
+    }
+
+    private double roundToOneDecimal(double value) {
+        return Math.round(value * 10) / 10.0;
     }
 }
